@@ -1,5 +1,4 @@
 import TabsView from '@/layouts/tabs/TabsView'
-import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
 
 // 路由配置
@@ -24,64 +23,16 @@ const options = {
       path: '/',
       name: '首页',
       component: TabsView,
-      redirect: '/login',
+      redirect: '/list/query',
+      meta: {
+        page: {
+          title: '小鲸鱼问诊平台'
+        }
+      },
       children: [
         {
-          path: 'dashboard',
-          name: 'Dashboard',
-          meta: {
-            icon: 'dashboard'
-          },
-          component: BlankView,
-          children: [
-            {
-              path: 'workplace',
-              name: '工作台',
-              meta: {
-                page: {
-                  closable: false
-                }
-              },
-              component: () => import('@/pages/dashboard/workplace'),
-            },
-            {
-              path: 'analysis',
-              name: '分析页',
-              component: () => import('@/pages/dashboard/analysis'),
-            }
-          ]
-        },
-        {
-          path: 'form',
-          name: '表单页',
-          meta: {
-            icon: 'form',
-            page: {
-              cacheAble: false
-            }
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'basic',
-              name: '基础表单',
-              component: () => import('@/pages/form/basic'),
-            },
-            {
-              path: 'step',
-              name: '分步表单',
-              component: () => import('@/pages/form/step'),
-            },
-            {
-              path: 'advance',
-              name: '高级表单',
-              component: () => import('@/pages/form/advance'),
-            }
-          ]
-        },
-        {
           path: 'list',
-          name: '列表页',
+          name: '管理',
           meta: {
             icon: 'table'
           },
@@ -89,108 +40,28 @@ const options = {
           children: [
             {
               path: 'query',
-              name: '查询表格',
+              name: '病症管理',
               meta: {
                 authority: 'queryForm',
               },
-              component: () => import('@/pages/list/QueryList'),
-            },
-            {
-              path: 'primary',
-              name: '标准列表',
-              component: () => import('@/pages/list/StandardList'),
-            },
-            {
-              path: 'card',
-              name: '卡片列表',
-              component: () => import('@/pages/list/CardList'),
+              component: () => import('@/pages/xiaojingyu/QueryList'),
             },
             {
               path: 'search',
-              name: '搜索列表',
-              component: () => import('@/pages/list/search/SearchLayout'),
+              name: '病症细分管理',
+              component: () => import('@/pages/xiaojingyu/search/SearchLayout'),
               children: [
                 {
                   path: 'article',
-                  name: '文章',
-                  component: () => import('@/pages/list/search/ArticleList'),
+                  name: '症状',
+                  component: () => import('@/pages/xiaojingyu/search/ArticleList'),
                 },
                 {
                   path: 'application',
-                  name: '应用',
-                  component: () => import('@/pages/list/search/ApplicationList'),
+                  name: '用药',
+                  component: () => import('@/pages/xiaojingyu/search/ApplicationList'),
                 },
-                {
-                  path: 'project',
-                  name: '项目',
-                  component: () => import('@/pages/list/search/ProjectList'),
-                }
               ]
-            }
-          ]
-        },
-        {
-          path: 'details',
-          name: '详情页',
-          meta: {
-            icon: 'profile'
-          },
-          component: BlankView,
-          children: [
-            {
-              path: 'basic',
-              name: '基础详情页',
-              component: () => import('@/pages/detail/BasicDetail')
-            },
-            {
-              path: 'advance',
-              name: '高级详情页',
-              component: () => import('@/pages/detail/AdvancedDetail')
-            }
-          ]
-        },
-        {
-          path: 'result',
-          name: '结果页',
-          meta: {
-            icon: 'check-circle-o',
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'success',
-              name: '成功',
-              component: () => import('@/pages/result/Success')
-            },
-            {
-              path: 'error',
-              name: '失败',
-              component: () => import('@/pages/result/Error')
-            }
-          ]
-        },
-        {
-          path: 'exception',
-          name: '异常页',
-          meta: {
-            icon: 'warning',
-          },
-          component: BlankView,
-          children: [
-            {
-              path: '404',
-              name: 'Exp404',
-              component: () => import('@/pages/exception/404')
-            },
-            {
-              path: '403',
-              name: 'Exp403',
-              component: () => import('@/pages/exception/403')
-            },
-            {
-              path: '500',
-              name: 'Exp500',
-              component: () => import('@/pages/exception/500')
             }
           ]
         },
@@ -219,33 +90,6 @@ const options = {
             }
           ]
         },
-        {
-          name: '验权表单',
-          path: 'auth/form',
-          meta: {
-            icon: 'file-excel',
-            authority: {
-              permission: 'form'
-            }
-          },
-          component: () => import('@/pages/form/basic')
-        },
-        {
-          name: 'Ant Design Vue',
-          path: 'antdv',
-          meta: {
-            icon: 'ant-design',
-            link: 'https://www.antdv.com/docs/vue/introduce-cn/'
-          }
-        },
-        {
-          name: '使用文档',
-          path: 'document',
-          meta: {
-            icon: 'file-word',
-            link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
-          }
-        }
       ]
     },
   ]
